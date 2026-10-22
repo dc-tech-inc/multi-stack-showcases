@@ -4,7 +4,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Projects · next-graphql-mongo",
-  description: "Next.js App Router + GraphQL + MongoDB reference by DC TECH INC (fictional data).",
+  description: "Next.js App Router + GraphQL + MongoDB reference by DCtech. (fictional data).",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
