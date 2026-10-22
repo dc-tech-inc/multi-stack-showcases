@@ -1,7 +1,7 @@
 # docker compose up --build  ->  http://localhost:3000 (fictional demo data)
 services:
   mongo:
-    image: mongo:8
+    image: mongo:9
     healthcheck:
       test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
       interval: 5s
