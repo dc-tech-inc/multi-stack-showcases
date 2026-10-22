@@ -34,7 +34,7 @@ Scripts: `npm run lint`, `npm run typecheck`, `npm test`, `npm run test:coverage
 
 ## What is tested
 
-16 tests run against a real MongoDB: a `mongo:8` service container in CI, or an in-memory `mongod` ([mongodb-memory-server](https://github.com/typegoose/mongodb-memory-server)) locally when `MONGODB_URI` is unset. Each test file uses its own throwaway database.
+16 tests run against a real MongoDB: a `mongo:9` service container in CI, or an in-memory `mongod` ([mongodb-memory-server](https://github.com/typegoose/mongodb-memory-server)) locally when `MONGODB_URI` is unset. Each test file uses its own throwaway database.
 
 - `store.test.ts`: aggregation counts, sorting, seeding only an empty database, title trimming and length limits, malformed ids rejected as `BAD_USER_INPUT`, unknown records as `NOT_FOUND`.
 - `graphql.test.ts`: the full HTTP path through Yoga (`yoga.fetch`): queries, nested filtered tasks, mutations, error codes, schema validation of enum values, and masking of unexpected errors (no internal message leaks).
