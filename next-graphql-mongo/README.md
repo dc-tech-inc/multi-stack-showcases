@@ -2,7 +2,7 @@
 
 [![next-graphql-mongo](https://github.com/dc-tech-inc/multi-stack-showcases/actions/workflows/next-graphql-mongo.yml/badge.svg)](https://github.com/dc-tech-inc/multi-stack-showcases/actions/workflows/next-graphql-mongo.yml)
 
-A small project tracker on **Next.js 16 (App Router)**, **GraphQL** (GraphQL Yoga in a route handler) and **MongoDB** (official Node.js driver). The home page is a Server Component that reads MongoDB directly; the same data is exposed as a GraphQL API at `/api/graphql` with queries for projects and tasks and mutations to add tasks and change their status. Data is fictional.
+A small project tracker on Next.js 16 (App Router), GraphQL (GraphQL Yoga in a route handler) and MongoDB (official Node.js driver). The home page is a Server Component that reads MongoDB directly; the same data is exposed as a GraphQL API at `/api/graphql` with queries for projects and tasks and mutations to add tasks and change their status. Data is fictional.
 
 ```mermaid
 flowchart LR

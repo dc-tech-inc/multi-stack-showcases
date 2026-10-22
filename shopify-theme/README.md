@@ -2,7 +2,7 @@
 
 [![shopify-theme](https://github.com/dc-tech-inc/multi-stack-showcases/actions/workflows/shopify-theme.yml/badge.svg)](https://github.com/dc-tech-inc/multi-stack-showcases/actions/workflows/shopify-theme.yml)
 
-A minimal **Shopify Online Store 2.0** theme in Liquid: JSON templates, sections with settings schemas, reusable snippets, translated strings and theme settings. It is validated in CI with **Theme Check** (Shopify's linter) at the strictest fail level. There is no real store behind it; nothing is published.
+A minimal Shopify Online Store 2.0 theme in Liquid: JSON templates, sections with settings schemas, reusable snippets, translated strings and theme settings. It is validated in CI with Theme Check (Shopify's linter) at the strictest fail level. There is no real store behind it; nothing is published.
 
 ```mermaid
 flowchart TD
