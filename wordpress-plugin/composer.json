@@ -1,0 +1,27 @@
+{
+  "name": "dc-tech-inc/dctech-property-leads",
+  "description": "WordPress lead-capture shortcode for property listings, tested with the WordPress test suite.",
+  "type": "wordpress-plugin",
+  "license": "MIT",
+  "require": {
+    "php": ">=8.0"
+  },
+  "require-dev": {
+    "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+    "phpunit/phpunit": "^9.6",
+    "squizlabs/php_codesniffer": "^3.10",
+    "wp-coding-standards/wpcs": "^3.1",
+    "wp-phpunit/wp-phpunit": "^6.8",
+    "yoast/phpunit-polyfills": "^2.0"
+  },
+  "scripts": {
+    "lint": "phpcs",
+    "test": "phpunit"
+  },
+  "config": {
+    "sort-packages": true,
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  }
+}
