@@ -1,0 +1,7 @@
+# Rails' own style (the default for new Rails 8 apps).
+inherit_gem: { rubocop-rails-omakase: rubocop.yml }
+
+AllCops:
+  Exclude:
+    - "db/schema.rb"
+    - "vendor/**/*"

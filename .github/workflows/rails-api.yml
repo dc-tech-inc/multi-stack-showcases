@@ -1,0 +1,67 @@
+name: rails-api
+
+on:
+  push:
+    branches: [main]
+    paths: ["rails-api/**", ".github/workflows/rails-api.yml"]
+  pull_request:
+    paths: ["rails-api/**", ".github/workflows/rails-api.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: rails-api
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      RAILS_ENV: test
+      COVERAGE: "1"
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ruby/setup-ruby@v1
+        with:
+          working-directory: rails-api # Ruby version from .ruby-version
+          bundler-cache: true
+      - name: Lockfile and schema are committed and current
+        run: |
+          bin/rails db:create db:migrate # not db:prepare: it seeds new databases
+          git status --porcelain -- Gemfile.lock db/schema.rb
+          test -z "$(git status --porcelain -- Gemfile.lock db/schema.rb)"
+      - name: Keep the generated files for review
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: rails-api-generated
+          path: |
+            rails-api/Gemfile.lock
+            rails-api/db/schema.rb
+      - run: bundle exec rubocop
+      - name: RSpec with coverage
+        run: |
+          set -o pipefail
+          bundle exec rspec --format documentation | tee rspec.txt
+          { echo '### rails-api'; echo '```'; tail -n 4 rspec.txt; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+
+  compose-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - name: docker compose up
+        run: docker compose up -d --build --wait --wait-timeout 300
+      - name: API responds with the seed data
+        run: |
+          curl -sSf http://localhost:3000/up
+          curl -sSf 'http://localhost:3000/books?q=harbor' | tee /dev/stderr | grep -q '"title":"The Quiet Harbor"'
+          curl -sSf 'http://localhost:3000/loans' | grep -q '"borrower_name":"Avery Stone"'
+      - name: Logs on failure
+        if: failure()
+        run: docker compose logs
+      - if: always()
+        run: docker compose down -v
