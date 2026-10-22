@@ -1,0 +1,17 @@
+:root { font-family: system-ui, sans-serif; color: #1c2430; background: #f6f7f9; }
+main { max-width: 960px; margin: 2rem auto; padding: 0 1rem; }
+.muted { color: #5b6573; }
+.error { color: #a4161a; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: .75rem; margin: 1.5rem 0; }
+.card { background: #fff; border: 1px solid #dde1e6; border-radius: 8px; padding: 1rem; display: flex; flex-direction: column; }
+.card .value { font-size: 1.75rem; font-weight: 600; }
+.card .label { color: #5b6573; font-size: .9rem; }
+.filters { display: flex; gap: 1.5rem; align-items: center; margin-bottom: .75rem; flex-wrap: wrap; }
+table { width: 100%; border-collapse: collapse; background: #fff; }
+th, td { padding: .5rem .75rem; border-bottom: 1px solid #e6e9ed; text-align: left; }
+.num { text-align: right; }
+tr.low td { background: #fff4e5; }
+tr.inactive td { color: #8a929c; }
+.badge { font-size: .75rem; background: #e8590c; color: #fff; border-radius: 4px; padding: 0 .35rem; margin-left: .35rem; }
+.badge.muted { background: #adb5bd; }
+.pager { display: flex; gap: 1rem; align-items: center; justify-content: flex-end; margin-top: .75rem; }
