@@ -1,0 +1,65 @@
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+-%}
+<article class="product">
+  <div class="product__media">
+    {%- if product.featured_media -%}
+      {{ product.featured_media | image_url: width: 1200 | image_tag: loading: 'eager', sizes: '(min-width: 750px) 50vw, 100vw', widths: '400, 800, 1200' }}
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'product__placeholder' }}
+    {%- endif -%}
+  </div>
+
+  <div class="product__info">
+    <h1>{{ product.title | escape }}</h1>
+    {% render 'price', variant: current_variant %}
+
+    {%- form 'product', product, class: 'product__form' -%}
+      {%- if product.has_only_default_variant -%}
+        <input type="hidden" name="id" value="{{ current_variant.id }}">
+      {%- else -%}
+        <label for="Variant-{{ section.id }}">{{ 'products.product.variant' | t }}</label>
+        <select id="Variant-{{ section.id }}" name="id">
+          {%- for variant in product.variants -%}
+            <option
+              value="{{ variant.id }}"
+              {% if variant == current_variant %}selected{% endif %}
+              {% unless variant.available %}disabled{% endunless %}
+            >
+              {{ variant.title | escape }} &ndash; {{ variant.price | money }}
+            </option>
+          {%- endfor -%}
+        </select>
+      {%- endif -%}
+
+      <label for="Quantity-{{ section.id }}">{{ 'products.product.quantity' | t }}</label>
+      <input id="Quantity-{{ section.id }}" type="number" name="quantity" value="1" min="1">
+
+      <button type="submit" {% unless current_variant.available %}disabled{% endunless %}>
+        {%- if current_variant.available -%}
+          {{ 'products.product.add_to_cart' | t }}
+        {%- else -%}
+          {{ 'products.product.sold_out' | t }}
+        {%- endif -%}
+      </button>
+    {%- endform -%}
+
+    {%- if section.settings.show_description -%}
+      <div class="product__description">{{ product.description }}</div>
+    {%- endif -%}
+  </div>
+</article>
+
+{% schema %}
+{
+  "name": "t:sections.main_product.name",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "t:sections.main_product.settings.show_description.label",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

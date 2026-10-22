@@ -1,0 +1,23 @@
+{%- comment -%}
+  Product tile used by collection grids.
+
+  Accepts:
+  - product: {Object} the product to show
+
+  Usage:
+  {% render 'product-card', product: product %}
+{%- endcomment -%}
+<div class="product-card">
+  <a href="{{ product.url }}" class="product-card__link">
+    {%- if product.featured_media -%}
+      {{ product.featured_media | image_url: width: 600 | image_tag: loading: 'lazy', class: 'product-card__image', sizes: '(min-width: 750px) 25vw, 50vw', widths: '300, 600' }}
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'product-card__image' }}
+    {%- endif -%}
+    <span class="product-card__title">{{ product.title | escape }}</span>
+  </a>
+  {% render 'price', variant: product.selected_or_first_available_variant %}
+  {%- unless product.available -%}
+    <span class="badge">{{ 'products.product.sold_out' | t }}</span>
+  {%- endunless -%}
+</div>

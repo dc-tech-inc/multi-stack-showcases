@@ -1,0 +1,39 @@
+name: shopify-theme
+
+on:
+  push:
+    branches: [main]
+    paths: ["shopify-theme/**", ".github/workflows/shopify-theme.yml"]
+  pull_request:
+    paths: ["shopify-theme/**", ".github/workflows/shopify-theme.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  SHOPIFY_CLI_NO_ANALYTICS: "1"
+
+defaults:
+  run:
+    working-directory: shopify-theme
+
+jobs:
+  theme-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: shopify-theme/package-lock.json
+      - run: npm ci
+      - name: Theme Check (fails on any offense)
+        run: npm run check
+      - name: The check is a real gate (a broken snippet must fail)
+        run: |
+          echo "{{ variant.price | not_a_filter }}{% render 'does-not-exist' %}" >> snippets/price.liquid
+          if npm run check; then echo "Theme Check passed a broken theme"; exit 1; fi
+          git checkout -- snippets/price.liquid
