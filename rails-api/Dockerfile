@@ -1,5 +1,6 @@
 # Development image: lets you run the API without installing Ruby.
-FROM ruby:4.0.8-slim
+# Same minor as .ruby-version; the 4.0.8 image is not published yet.
+FROM ruby:4.0-slim
 
 RUN apt-get update -qq \
  && apt-get install -y --no-install-recommends build-essential libyaml-dev \
