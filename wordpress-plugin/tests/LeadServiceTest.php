@@ -31,7 +31,7 @@ class LeadServiceTest extends WP_UnitTestCase {
 
 		$this->assertIsInt( $id );
 		$this->assertSame( 'private', get_post_status( $id ) );
-		$this->assertSame( 'Alex Example', get_the_title( $id ) );
+		$this->assertSame( 'Alex Example', get_post_field( 'post_title', $id ) );
 		$this->assertSame( 'alex@example.com', get_post_meta( $id, '_dctech_lead_email', true ) );
 		$this->assertSame( 'Loft 9', get_post_meta( $id, '_dctech_lead_property', true ) );
 	}
@@ -58,7 +58,7 @@ class LeadServiceTest extends WP_UnitTestCase {
 		);
 
 		$this->assertIsInt( $id );
-		$this->assertStringNotContainsString( '<', get_the_title( $id ) );
+		$this->assertStringNotContainsString( '<', get_post_field( 'post_title', $id ) );
 	}
 
 	public function test_create_fires_action_only_on_success(): void {
