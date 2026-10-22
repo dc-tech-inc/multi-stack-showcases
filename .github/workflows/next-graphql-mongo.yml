@@ -1,0 +1,67 @@
+name: next-graphql-mongo
+
+on:
+  push:
+    branches: [main]
+    paths: ["next-graphql-mongo/**", ".github/workflows/next-graphql-mongo.yml"]
+  pull_request:
+    paths: ["next-graphql-mongo/**", ".github/workflows/next-graphql-mongo.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: next-graphql-mongo
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    services:
+      mongo:
+        image: mongo:8
+        ports: ["27017:27017"]
+        options: >-
+          --health-cmd "mongosh --quiet --eval 'db.adminCommand(\"ping\").ok'"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      MONGODB_URI: mongodb://localhost:27017
+      MONGOMS_DISABLE_POSTINSTALL: "1" # tests use the service container
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: next-graphql-mongo/package-lock.json
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - name: Tests with coverage (against the MongoDB service)
+        run: |
+          set -o pipefail
+          npm run test:coverage | tee coverage.txt
+          { echo '### next-graphql-mongo coverage'; echo '```'; sed -n '/Coverage summary/,/====/p' coverage.txt; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - run: npm run build
+
+  compose-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - name: docker compose up
+        run: docker compose up -d --build --wait --wait-timeout 180
+      - name: Page and GraphQL respond with the demo data
+        run: |
+          curl -sSf --retry 10 --retry-delay 3 --retry-all-errors http://localhost:3000/ | grep -q "Clinic booking portal"
+          curl -sSf -H 'content-type: application/json' \
+            -d '{"query":"{ projects { name taskCount } }"}' http://localhost:3000/api/graphql | tee /dev/stderr | grep -q '"taskCount":3'
+      - name: Logs on failure
+        if: failure()
+        run: docker compose logs
+      - if: always()
+        run: docker compose down -v
