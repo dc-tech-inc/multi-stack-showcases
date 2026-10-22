@@ -1,0 +1,6 @@
+/log/*
+/tmp/*
+/storage/*
+!/storage/.keep
+/coverage/
+/vendor/bundle/
