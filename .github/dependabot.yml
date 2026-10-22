@@ -30,3 +30,6 @@ updates:
   - package-ecosystem: docker
     directory: /next-graphql-mongo
     schedule: { interval: weekly }
+  - package-ecosystem: npm
+    directory: /shopify-theme
+    schedule: { interval: weekly }

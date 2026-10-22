@@ -1,0 +1,11 @@
+{
+  "name": "shopify-theme",
+  "private": true,
+  "scripts": {
+    "check": "shopify theme check --fail-level suggestion",
+    "dev": "shopify theme dev"
+  },
+  "devDependencies": {
+    "@shopify/cli": "4.9.4"
+  }
+}
