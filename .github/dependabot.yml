@@ -27,3 +27,6 @@ updates:
   - package-ecosystem: composer
     directory: /wordpress-plugin
     schedule: { interval: weekly }
+  - package-ecosystem: docker
+    directory: /next-graphql-mongo
+    schedule: { interval: weekly }
