@@ -1,0 +1,41 @@
+{%- paginate collection.products by section.settings.products_per_page -%}
+  <section class="collection">
+    <h1>{{ collection.title | escape }}</h1>
+    {%- if collection.description != blank -%}
+      <div class="collection__description">{{ collection.description }}</div>
+    {%- endif -%}
+
+    {%- if collection.products_count == 0 -%}
+      <p>{{ 'collections.empty' | t }}</p>
+    {%- else -%}
+      <ul class="product-grid" role="list">
+        {%- for product in collection.products -%}
+          <li>{% render 'product-card', product: product %}</li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {%- if paginate.pages > 1 -%}
+      <nav class="pagination" aria-label="{{ 'general.pagination' | t }}">
+        {{ paginate | default_pagination }}
+      </nav>
+    {%- endif -%}
+  </section>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "t:sections.main_collection.name",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "t:sections.main_collection.settings.products_per_page.label",
+      "min": 4,
+      "max": 24,
+      "step": 4,
+      "default": 12
+    }
+  ]
+}
+{% endschema %}

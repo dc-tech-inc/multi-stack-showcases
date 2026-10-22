@@ -1,0 +1,72 @@
+{
+  "settings_schema": {
+    "layout": {
+      "name": "Layout",
+      "settings": {
+        "color_accent": {
+          "label": "Accent color"
+        },
+        "page_width": {
+          "label": "Page width"
+        }
+      }
+    }
+  },
+  "sections": {
+    "header": {
+      "name": "Header",
+      "settings": {
+        "menu": {
+          "label": "Menu"
+        }
+      }
+    },
+    "footer": {
+      "name": "Footer",
+      "settings": {
+        "text": {
+          "label": "Text"
+        }
+      }
+    },
+    "featured_collection": {
+      "name": "Featured collection",
+      "settings": {
+        "heading": {
+          "label": "Heading"
+        },
+        "collection": {
+          "label": "Collection"
+        },
+        "products_to_show": {
+          "label": "Products to show"
+        }
+      }
+    },
+    "main_product": {
+      "name": "Product information",
+      "settings": {
+        "show_description": {
+          "label": "Show description"
+        }
+      }
+    },
+    "main_collection": {
+      "name": "Collection grid",
+      "settings": {
+        "products_per_page": {
+          "label": "Products per page"
+        }
+      }
+    },
+    "main_page": {
+      "name": "Page"
+    },
+    "main_cart": {
+      "name": "Cart"
+    },
+    "main_404": {
+      "name": "404 page"
+    }
+  }
+}
