@@ -1,6 +1,6 @@
 # multi-stack-showcases
 
-Small, tested reference apps by **DC TECH INC**, one folder per stack. Each folder is self-contained: its own README, one command to run it, fictional data only, and its own CI workflow that runs only when that folder changes.
+Small, tested reference apps by **DCtech.**, one folder per stack. Each folder is self-contained: its own README, one command to run it, fictional data only, and its own CI workflow that runs only when that folder changes.
 
 | Folder | Stack | What it shows | CI |
 |---|---|---|---|
