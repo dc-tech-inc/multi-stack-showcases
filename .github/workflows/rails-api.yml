@@ -30,7 +30,7 @@ jobs:
           bundler-cache: true
       - name: Lockfile and schema are committed and current
         run: |
-          bin/rails db:prepare
+          bin/rails db:create db:migrate # not db:prepare: it seeds new databases
           git status --porcelain -- Gemfile.lock db/schema.rb
           test -z "$(git status --porcelain -- Gemfile.lock db/schema.rb)"
       - name: Keep the generated files for review
