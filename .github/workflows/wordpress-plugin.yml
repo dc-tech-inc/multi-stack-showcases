@@ -1,0 +1,56 @@
+name: wordpress-plugin
+
+on:
+  push:
+    branches: [main]
+    paths: ['wordpress-plugin/**', '.github/workflows/wordpress-plugin.yml']
+  pull_request:
+    paths: ['wordpress-plugin/**', '.github/workflows/wordpress-plugin.yml']
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: wordpress-plugin
+
+env:
+  WP_VERSION: '6.8.2'
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_DATABASE: wordpress_test
+          MYSQL_ROOT_PASSWORD: ci-root-password
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1"
+          --health-interval=5s --health-timeout=5s --health-retries=20
+    env:
+      WP_CORE_DIR: /tmp/wordpress
+      WP_TEST_DB_HOST: 127.0.0.1
+      WP_TEST_DB_NAME: wordpress_test
+      WP_TEST_DB_USER: root
+      WP_TEST_DB_PASSWORD: ci-root-password
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mysqli
+          tools: composer:v2
+      - run: composer install --no-interaction --no-progress --prefer-dist
+      - name: PHPCS (WordPress Coding Standards)
+        run: vendor/bin/phpcs
+      - name: Download WordPress core (checksum verified)
+        working-directory: /tmp
+        run: |
+          curl -fsSLO "https://wordpress.org/wordpress-${WP_VERSION}.tar.gz"
+          echo "$(curl -fsSL "https://wordpress.org/wordpress-${WP_VERSION}.tar.gz.sha1")  wordpress-${WP_VERSION}.tar.gz" | sha1sum -c -
+          tar -xzf "wordpress-${WP_VERSION}.tar.gz"
+      - name: PHPUnit (WordPress test suite)
+        run: vendor/bin/phpunit
