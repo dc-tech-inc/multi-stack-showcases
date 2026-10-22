@@ -1,0 +1,20 @@
+# docker compose up --build  ->  http://localhost:3000 (fictional demo data)
+services:
+  mongo:
+    image: mongo:8
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build: .
+    ports: ["3000:3000"]
+    environment:
+      MONGODB_URI: mongodb://mongo:27017
+      MONGODB_DB: showcase
+      SEED_DEMO_DATA: "true"
+    depends_on:
+      mongo:
+        condition: service_healthy
