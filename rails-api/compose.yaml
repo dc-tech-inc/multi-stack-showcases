@@ -1,0 +1,10 @@
+# docker compose up --build  ->  http://localhost:3000/books (fictional seed data)
+services:
+  api:
+    build: .
+    ports: ["3000:3000"]
+    healthcheck:
+      test: ["CMD", "ruby", "-rnet/http", "-e", "exit Net::HTTP.get_response(URI('http://localhost:3000/up')).is_a?(Net::HTTPSuccess)"]
+      interval: 5s
+      timeout: 5s
+      retries: 20

@@ -1,0 +1,5 @@
+log/*
+tmp/*
+storage/*.sqlite3*
+coverage
+vendor/bundle
