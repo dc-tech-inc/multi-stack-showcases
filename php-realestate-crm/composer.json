@@ -12,10 +12,10 @@
     "phpstan/phpstan": "^2.1"
   },
   "autoload": {
-    "psr-4": { "DcTech\RealEstate\\": "src/" }
+    "psr-4": { "DcTech\\RealEstate\\": "src/" }
   },
   "autoload-dev": {
-    "psr-4": { "DcTech\RealEstate\Tests\\": "tests/" }
+    "psr-4": { "DcTech\\RealEstate\\Tests\\": "tests/" }
   },
   "scripts": {
     "analyse": "phpstan analyse --memory-limit=256M",
