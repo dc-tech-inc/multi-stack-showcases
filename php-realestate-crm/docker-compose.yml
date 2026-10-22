@@ -1,0 +1,27 @@
+services:
+  db:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: ${DB_NAME:-realestate}
+      MYSQL_USER: ${DB_USER:-realestate}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-change-me-locally}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-change-me-locally-too}
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  app:
+    build: .
+    environment:
+      DB_HOST: db
+      DB_NAME: ${DB_NAME:-realestate}
+      DB_USER: ${DB_USER:-realestate}
+      DB_PASSWORD: ${DB_PASSWORD:-change-me-locally}
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
