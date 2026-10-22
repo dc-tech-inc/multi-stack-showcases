@@ -3,33 +3,63 @@ updates:
   - package-ecosystem: github-actions
     directory: /
     schedule: { interval: weekly }
+
   - package-ecosystem: npm
     directory: /next-graphql-mongo
     schedule: { interval: weekly }
     groups:
       minor-and-patch:
         update-types: [minor, patch]
+    ignore:
+      # typescript-eslint and the Next.js TS plugin support TypeScript < 6.1.
+      - dependency-name: typescript
+        versions: [">= 6.1"]
+      # GraphQL Yoga 5 / graphql-tools are built against graphql 16 (see README).
+      - dependency-name: graphql
+        versions: [">= 17"]
+
   - package-ecosystem: npm
     directory: /vue-dashboard
     schedule: { interval: weekly }
     groups:
       minor-and-patch:
         update-types: [minor, patch]
+    ignore:
+      # vue-tsc and typescript-eslint use the TypeScript compiler API (< 6.1).
+      - dependency-name: typescript
+        versions: [">= 6.1"]
+
+  - package-ecosystem: npm
+    directory: /shopify-theme
+    schedule: { interval: weekly }
+
   - package-ecosystem: bundler
     directory: /rails-api
     schedule: { interval: weekly }
     groups:
       minor-and-patch:
         update-types: [minor, patch]
+
   - package-ecosystem: composer
     directory: /php-realestate-crm
     schedule: { interval: weekly }
+
   - package-ecosystem: composer
     directory: /wordpress-plugin
     schedule: { interval: weekly }
+
   - package-ecosystem: docker
     directory: /next-graphql-mongo
     schedule: { interval: weekly }
-  - package-ecosystem: npm
-    directory: /shopify-theme
+    ignore:
+      # Stay on Node.js LTS (even majors); odd majors are short-lived.
+      - dependency-name: node
+        update-types: ["version-update:semver-major"]
+
+  - package-ecosystem: docker
+    directory: /rails-api
+    schedule: { interval: weekly }
+
+  - package-ecosystem: docker
+    directory: /php-realestate-crm
     schedule: { interval: weekly }
