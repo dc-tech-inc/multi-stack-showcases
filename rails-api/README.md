@@ -56,4 +56,4 @@ No authentication or borrower accounts (a borrower is a name), no rate limiting,
 
 - Rails guides: [Using Rails for API-only applications](https://guides.rubyonrails.org/api_app.html), [Active Record validations](https://guides.rubyonrails.org/active_record_validations.html), [Active Record migrations](https://guides.rubyonrails.org/active_record_migrations.html), [Routing (member routes)](https://guides.rubyonrails.org/routing.html#adding-member-routes), [Strong parameters `params.expect`](https://api.rubyonrails.org/classes/ActionController/Parameters.html#method-i-expect), [Testing time helpers](https://api.rubyonrails.org/classes/ActiveSupport/Testing/TimeHelpers.html)
 - [RSpec Rails request specs](https://rspec.info/features/8-0/rspec-rails/request-specs/request-spec/) · [SimpleCov](https://github.com/simplecov-ruby/simplecov) · [rubocop-rails-omakase](https://github.com/rails/rubocop-rails-omakase)
-- [ISBN-13 check digit](https://www.isbn-international.org/content/isbn-users-manual) (ISBN Users' Manual)
+- [ISBN-13 check digit](https://www.isbn-international.org/content/isbn-users-manual/29) (ISBN Users' Manual)
