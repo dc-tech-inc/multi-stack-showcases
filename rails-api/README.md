@@ -2,7 +2,7 @@
 
 [![rails-api](https://github.com/dc-tech-inc/multi-stack-showcases/actions/workflows/rails-api.yml/badge.svg)](https://github.com/dc-tech-inc/multi-stack-showcases/actions/workflows/rails-api.yml)
 
-A small lending-library JSON API on **Ruby on Rails 8.1 (API-only mode)** with **RSpec**. Books have copies; a loan takes a copy until it is returned; overdue loans can be listed. Data is fictional and stored in SQLite, so it runs with no other services.
+A small lending-library JSON API on Ruby on Rails 8.1 (API-only mode) with RSpec. Books have copies; a loan takes a copy until it is returned; overdue loans can be listed. Data is fictional and stored in SQLite, so it runs with no other services.
 
 ```mermaid
 flowchart LR
@@ -32,7 +32,7 @@ With Ruby 4.0 installed: `bundle install && bin/rails db:prepare db:seed && bin/
 
 Errors always look like `{ "error": { "status": 422, "message": "Validation failed", "details": { "isbn": ["has an invalid check digit"] } } }`.
 
-## Rules worth testing (and tested)
+## Rules covered by tests
 
 - ISBN-13 is normalised (dashes removed), must start with 978/979 and have a valid **check digit**; unique.
 - A loan is refused when no copy is available; `copies` cannot be lowered below the copies on loan.

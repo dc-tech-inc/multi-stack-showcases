@@ -4,7 +4,7 @@ These are demo apps with fictional data and are not deployed anywhere. Reports a
 
 ## Reporting a vulnerability
 
-Please do not open a public issue. Use GitHub's private vulnerability reporting: **Security → Report a vulnerability** on this repository. If that is unavailable, contact DCtech. through https://dctech.live.
+Do not open a public issue. Use GitHub's private vulnerability reporting: **Security → Report a vulnerability** on this repository. If that is unavailable, contact DCtech. through https://dctech.live.
 
 Include what you found, how to reproduce it, the folder and the affected commit. You can expect an acknowledgement within a few business days.
 

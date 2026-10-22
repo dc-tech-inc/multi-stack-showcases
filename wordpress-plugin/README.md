@@ -1,8 +1,8 @@
 # wordpress-plugin: DC Tech Property Leads
 
-A minimal WordPress plugin that adds a **lead-capture form shortcode** for property listings. Leads are stored as private posts of an admin-only post type, and a `dctech_lead_created` action lets a site forward them to a CRM (for example the sibling [`php-realestate-crm`](../php-realestate-crm)). It is an original example with no client code.
+A minimal WordPress plugin that adds a lead-capture form shortcode for property listings. Leads are stored as private posts of an admin-only post type, and a `dctech_lead_created` action lets a site forward them to a CRM (for example the sibling [`php-realestate-crm`](../php-realestate-crm)). It is an original example with no client code.
 
-**What it demonstrates:** the WordPress plugin lifecycle, shortcodes, `admin-post.php` form handling with nonce + honeypot, input sanitisation and output escaping, a custom post type, and tests that run inside the **real WordPress test suite** with PHPCS (WordPress Coding Standards) in CI.
+**What it demonstrates:** the WordPress plugin lifecycle, shortcodes, `admin-post.php` form handling with nonce + honeypot, input sanitisation and output escaping, a custom post type, and tests that run inside the real WordPress test suite with PHPCS (WordPress Coding Standards) in CI.
 
 ## Use it
 

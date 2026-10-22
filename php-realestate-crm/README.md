@@ -1,6 +1,6 @@
 # php-realestate-crm
 
-A small real-estate **listings + lead/visit CRM** JSON API in plain PHP 8 and MySQL. It is a clean-room recreation of the concept with **fictional data** (invented names, `example.com` e-mails, `555-01xx` phones); it contains nothing from any client site.
+A small real-estate listings + lead/visit CRM JSON API in plain PHP 8 and MySQL. It is a clean-room recreation of the concept with **fictional data** (invented names, `example.com` e-mails, `555-01xx` phones); it contains nothing from any client site.
 
 **What it demonstrates:** PDO prepared statements, schema design with foreign keys and a unique constraint, a transactional business rule, input validation, and a framework-free router that is unit/integration tested and statically analysed (PHPStan level 8).
 

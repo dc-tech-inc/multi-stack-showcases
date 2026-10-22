@@ -2,7 +2,7 @@
 
 [![vue-dashboard](https://github.com/dc-tech-inc/multi-stack-showcases/actions/workflows/vue-dashboard.yml/badge.svg)](https://github.com/dc-tech-inc/multi-stack-showcases/actions/workflows/vue-dashboard.yml)
 
-Inventory dashboard in **Vue 3 + TypeScript** (Composition API, `<script setup>`, Vite). It reads headline counts, warehouses and a paged, searchable product list. The data is fictional and served by an in-memory mock that follows the OpenAPI 3.1 contract of [warehouse-inventory-platform](https://github.com/dc-tech-inc/warehouse-inventory-platform): the `Dashboard`, `Warehouse`, `Product` and `ProductListResponse` schemas, and the `GET /api/products` paging rules (`limit` 1–100, default 25, `offset` ≥ 0).
+Inventory dashboard in Vue 3 + TypeScript (Composition API, `<script setup>`, Vite). It reads headline counts, warehouses and a paged, searchable product list. The data is fictional and served by an in-memory mock that follows the OpenAPI 3.1 contract of [warehouse-inventory-platform](https://github.com/dc-tech-inc/warehouse-inventory-platform): the `Dashboard`, `Warehouse`, `Product` and `ProductListResponse` schemas, and the `GET /api/products` paging rules (`limit` 1–100, default 25, `offset` ≥ 0).
 
 ```mermaid
 flowchart LR
