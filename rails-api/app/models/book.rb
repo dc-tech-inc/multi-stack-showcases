@@ -13,8 +13,9 @@ class Book < ApplicationRecord
   scope :search, ->(q) {
     next all if q.blank?
 
+    # sanitize_sql_like escapes % and _ with a backslash; SQLite only honours it with ESCAPE.
     pattern = "%#{sanitize_sql_like(q.strip)}%"
-    where("title LIKE :pattern OR author LIKE :pattern", pattern:)
+    where("title LIKE :pattern ESCAPE '\\' OR author LIKE :pattern ESCAPE '\\'", pattern:)
   }
 
   # Adds active_loans_count with a correlated subquery, so a page of books
