@@ -1,0 +1,50 @@
+name: php-realestate-crm
+
+on:
+  push:
+    branches: [main]
+    paths: ['php-realestate-crm/**', '.github/workflows/php-realestate-crm.yml']
+  pull_request:
+    paths: ['php-realestate-crm/**', '.github/workflows/php-realestate-crm.yml']
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: php-realestate-crm
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.4
+        env:
+          MYSQL_DATABASE: realestate_test
+          MYSQL_USER: ci
+          MYSQL_PASSWORD: ci-password
+          MYSQL_ROOT_PASSWORD: ci-root-password
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1"
+          --health-interval=5s --health-timeout=5s --health-retries=20
+    env:
+      DB_HOST: 127.0.0.1
+      DB_PORT: '3306'
+      DB_NAME: realestate_test
+      DB_USER: ci
+      DB_PASSWORD: ci-password
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: pdo_mysql
+          coverage: pcov
+          tools: composer:v2
+      - run: composer install --no-interaction --no-progress --prefer-dist
+      - name: PHPStan (level 8)
+        run: composer analyse
+      - name: PHPUnit (unit + MySQL integration)
+        run: vendor/bin/phpunit --coverage-text
